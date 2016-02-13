@@ -1,7 +1,25 @@
-/*body {
+body {
     background-color: #191919;
 }
 
-div {
-    background-color: rgba(235, 235, 235, 0.75);
-}*/
+h1 {
+    color: #fff;
+}
+
+div.col.box {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin: 20px 0 50px 0;
+}
+
+ul {
+    font-size: 18px;
+}
+
+.truncate {
+    width: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

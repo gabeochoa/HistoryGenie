@@ -1,5 +1,6 @@
 var blacklist = ["google.com", "chrome-extension://"];
 var blacklistRegex = new RegExp( '\\b' + blacklist.join('\\b|\\b') + '\\b');
+var topSites = "";
 
 $(document).ready(function() {
     chrome.history.search({ text: "", maxResults: 2147483647 }, function(data) {
@@ -8,7 +9,7 @@ $(document).ready(function() {
         // Check if history data is available for analysis
         if (data.length == 0)
         {
-            addTable("No history available.");
+            $("#topSites ul").append("<li class='truncate'>No history available.</li>");
             return;
         }
         else if (max >= data.length)
@@ -28,10 +29,10 @@ $(document).ready(function() {
             }
             else
             {
-                str = "Most visited url " + data[i].visitCount + " times: " + data[i].url;
-                addTable(str);
+                $("#topSites ul").append("<li class='truncate'>Most visited url " + data[i].visitCount + " times: <a href='" + data[i].url + "'>" + data[i].title + "</a></li>");
             }
         }
+        return;
     });
 });
 
