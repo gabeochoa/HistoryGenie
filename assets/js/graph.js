@@ -26,4 +26,4 @@ var data = {
     }
     ]
 };
-var myLineChart = new Chartjs(ctx).Line(data, options);
+var myLineChart = new Chartjs(ctx).Line(data, null);
