@@ -4,12 +4,13 @@
         <title>History Genie</title>
     </head>
     <body>
-        <input id="upload" type="file">
-        <div id="byte_content"></div>
+        <label for="upload">Upload your custom history.json file:<br /><br /></label>
+        <input id="upload" type="file" />
+        <div id="byte_content"></div><br />
         <table id="myTable">
             <thead>
                 <tr>
-                    <th>My Header</th>
+                    <th>Your Top 10 Links</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
             </tbody>
         </table>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/main.js"></script>
     </body>
 </html>
