@@ -1,85 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>History Genie</title>
-	<script>
-		function parseData(predata)
-		{
-			data = JSON.parse(predata);
-			output = "";
-			maxvisited = 0;
-			visited = "";
-			sites = [];
-			alert(data.length)
-			for (var i = 0; i < data.length; i++)
-			{
-				point = data[i];
-				output += JSON.stringify(data[i]);
-				document.getElementById('byte_content').textContent = output;
-				output = "";
-
-				if(maxvisited < point["visitCount"])
-				{
-					maxvisited = point["visitCount"]
-					visited = point["url"]
-				}
-			};
-			str = "Most visited url " + maxvisited + " times:" + visited
-			addTable(str)
-				
-		}
-
-		function addTable(dd)
-		{
-			var tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-			// Insert a row in the table at the last row
-			var newRow   = tableRef.insertRow(tableRef.rows.length);
-			// Insert a cell in the row at index 0
-			//var newCell  = newRow.insertCell(0);
-			// Append a text node to the cell
-			var text  = document.createTextNode(dd)
-			//newCell.appendChild(newText);
-			newRow.appendChild(text)
-		}
-
-		function loadFile() 
-		{
-  			var file = document.getElementById("uploadInput").files[0];
-	    	var reader = new FileReader();
-
-	    	reader.onloadend = function(evt) 
-	    	{
-				if (evt.target.readyState == FileReader.DONE) 
-				{ 
-					//document.getElementById('byte_content').textContent = evt.target.result;
-					parseData(evt.target.result);
-				}
-			};
-		    var blob = file.slice(0, file.size);
-    		reader.readAsBinaryString(blob);
-	    }
-
-</script>
-</head>
-<body>
-		<p><input id="uploadInput" type="file" onchange="loadFile();" multiple>
-		<div id="byte_content"></div>
-		<table id="myTable">
-		    <thead>
-		        <tr>
-		            <th>My Header</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr>
-		            <td></td> 
-		        </tr>
-		    </tbody>
-		    <tfoot>
-		        <tr>
-		            <td>My footer</td>
-		        </tr>
-		    <tfoot>
-		</table>
-</body>
+    <head>
+        <title>History Genie</title>
+    </head>
+    <body>
+        <input id="uploadInput" type="file" onchange="loadFile();" multiple>
+        <div id="byte_content"></div>
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>My Header</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>My footer</td>
+                </tr>
+            <tfoot>
+        </table>
+    <script src="scripts/main.js"></script>
+    </body>
 </html>
