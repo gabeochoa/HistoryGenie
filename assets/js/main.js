@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
 });
 
-/*function parseData(predata)
+function parseData(predata)
 {
     data = JSON.parse(predata);
     output = "";
@@ -57,7 +57,7 @@ $(document).ready(function() {
     }
     str = "Most visited url " + maxvisited + " times:" + visited;
     addTable(str);
-}*/
+}
 
 function addTable(dd)
 {
