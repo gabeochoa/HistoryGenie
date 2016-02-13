@@ -18,8 +18,8 @@ Installation
 RoadMap
 -------
 
-*~~Load History from file (JSON)~~
-*Load History automatically (Chrome API)
-*Beautiful Charts & Graphs
+* ~~Load History from file (JSON)~~
+* Load History automatically (Chrome API)
+* Beautiful Charts & Graphs
 
 
