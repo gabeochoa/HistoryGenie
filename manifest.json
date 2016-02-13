@@ -1,19 +1,25 @@
 {
-  "manifest_version": 2,
-  "name": "History Genie",
-  "version": "0.1.0",
-  "description": "Analyzes your browser history for trends and collects statistics.",
-  "browser_action": {
-      "default_title": "History Genie",
-      "default_icon": "assets/icons/icon-16.png",
-      "default_popup": "index.html"
-  },
-  "icons": {
-    "16": "assets/icons/icon-16.png",
-    "48": "assets/icons/icon-48.png",
-    "128": "assets/icons/icon-128.png"
-  },
-  "permissions": [],
-  "short_name": "History Genie",
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+    "manifest_version": 2,
+    "name": "History Genie",
+    "version": "0.1.0",
+    "description": "Analyzes your browser history for trends and collects statistics.",
+    "browser_action": {
+        "default_title": "History Genie",
+        "default_icon": "assets/icons/icon-16.png"
+    },
+    "icons": {
+        "16": "assets/icons/icon-16.png",
+        "48": "assets/icons/icon-48.png",
+        "128": "assets/icons/icon-128.png"
+    },
+    "permissions": [
+        "history"
+    ],
+    "background": {
+        "scripts": [
+            "assets/js/background.js"
+        ]
+    },
+    "short_name": "History Genie",
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }
