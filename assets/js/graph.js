@@ -1,6 +1,25 @@
 var Chartjs = Chart.noConflict();
-var ctx = document.getElementById("testchart").getContext("2d");
+var ctx = document.getElementById("timeofdaychart").getContext("2d");
 var lineChart;
+
+var ctx2 = document.getElementById("musicchart").getContext("2d");
+
+function music(data)
+{
+
+    var musicsites = ["soundcloud.com", "youtube.com", "spotify.com"];
+    var musicreg = new RegExp('\\w' + musicsites.join('|') + "[/]" + "\\w");
+    
+    // Show top ten visited sites
+    for (var i = 0; i < data.length; i++)
+    {
+        if (musicreg.test(data[i].url))
+        {
+            console.log(data[i].url);
+        }
+    }
+}
+
 
 function histogram(arr)
 {

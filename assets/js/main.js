@@ -53,6 +53,7 @@ function searchTopSites(callback)
     chrome.history.search({ text: "", maxResults: 2147483647 }, function(data) {
         processData(data, 10, true);
         callback();
+        music(data)
     });
 }
 
