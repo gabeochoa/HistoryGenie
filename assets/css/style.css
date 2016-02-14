@@ -13,13 +13,25 @@ div.col.box {
     margin: 20px 0 50px 0;
 }
 
-ul {
+ol {
     font-size: 18px;
+    list-style-type: decimal;
+}
+
+ol li {
+    display: list-item!important;
+    color: #000;
 }
 
 .truncate {
-    width: inherit;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: inherit!important;
+}
+
+h5 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000;
+}
+
+a.graphVisits {
+    cursor: pointer;
 }

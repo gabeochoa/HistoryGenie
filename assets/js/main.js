@@ -1,6 +1,10 @@
 var blacklist = ["google.com", "chrome-extension://"];
 var blacklistRegex = new RegExp( '\\b' + blacklist.join('\\b|\\b') + '\\b');
-var topSites = "";
+
+function addToList(str)
+{
+    $("#topSites ol").append("<li class='truncate'>" + str + "</li>");
+}
 
 $(document).ready(function() {
     chrome.history.search({ text: "", maxResults: 2147483647 }, function(data) {
@@ -9,7 +13,7 @@ $(document).ready(function() {
         // Check if history data is available for analysis
         if (data.length == 0)
         {
-            $("#topSites ul").append("<li class='truncate'>No history available.</li>");
+            addToList("No history available.");
             return;
         }
         else if (max >= data.length)
@@ -29,7 +33,7 @@ $(document).ready(function() {
             }
             else
             {
-                $("#topSites ul").append("<li class='truncate'>Most visited url " + data[i].visitCount + " times: <a href='" + data[i].url + "'>" + data[i].title + "</a></li>");
+                addToList("<a class='graphVisits'>View Chart</a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
             }
         }
         return;
@@ -38,11 +42,10 @@ $(document).ready(function() {
 
 function parseData(predata)
 {
-    data = JSON.parse(predata);
-    output = "";
-    maxvisited = 0;
-    visited = "";
-    sites = [];
+    var data = JSON.parse(predata);
+    var maxvisited = 0;
+    var visited = "", output = "", title = "";
+    var sites = [];
     for (var i = 0; i < data.length; i++)
     {
         point = data[i];
@@ -52,25 +55,13 @@ function parseData(predata)
 
         if(maxvisited < point["visitCount"])
         {
-            maxvisited = point["visitCount"]
-            visited = point["url"]
+            maxvisited = point["visitCount"];
+            visited = point["url"];
+            title = point["title"];
         }
     }
-    str = "Most visited url " + maxvisited + " times:" + visited;
-    addTable(str);
-}
-
-function addTable(dd)
-{
-    var tableRef = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-
-    // Insert a row in the table at the last row
-    var newRow = tableRef.insertRow(tableRef.rows.length);
-
-    // Append a text node to the cell
-    var text = document.createTextNode(dd);
-
-    newRow.appendChild(text);
+    addToList("[" + maxvisited + "] <a href='" + visited + "'>" + title + "</a>");
+    addToList(str);
 }
 
 $('#upload').change(function() {
