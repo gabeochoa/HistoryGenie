@@ -16,13 +16,14 @@ div.col.box {
 ol {
     font-size: 18px;
     list-style-type: decimal;
-    list-style-position: inside;
     padding-left: 10px;
 }
 
 ol li {
     display: list-item!important;
     color: #000;
+    margin-left: 30px;
+    padding-left: 10px;
 }
 
 h5 {
@@ -36,4 +37,8 @@ a.graphVisits {
 
 a.graphVisits i {
     vertical-align: middle;
+}
+
+.ellipsis {
+    white-space: normal;
 }
