@@ -21,6 +21,8 @@ RoadMap
 * ~~Load History from file (JSON)~~
 * ~~Load History automatically (Chrome API)~~
 * ~~Top Ten Visited Sites~~
+* ~~Site give time of day~~
+* Time of day given site
 * Beautiful Charts & Graphs
 * Analyse Search History
 
