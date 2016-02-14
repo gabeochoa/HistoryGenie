@@ -1,7 +1,6 @@
 var Chartjs = Chart.noConflict();
 var ctx = document.getElementById("timeofdaychart").getContext("2d");
-var ctx2 = document.getElementById("musicchart").getContext("2d");
-var lineChartSites, lineChartVideos;
+var lineChartSites;
 
 function histogram(arr)
 {

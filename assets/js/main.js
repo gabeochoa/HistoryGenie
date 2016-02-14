@@ -2,6 +2,8 @@ var blacklist = ["google.com", "chrome-extension://"];
 var blacklistRegex = new RegExp( '\\b' + blacklist.join('\\b|\\b') + '\\b');
 var musicSites = ["soundcloud.com", "youtube.com", "spotify.com"];
 var musicRegex = new RegExp('\\w' + musicSites.join('|') + "[/]" + "\\w");
+var socialSites = ["facebook.com", "twitter.com", "plus.google.com", "instagram.com"];
+var socialRegex = new RegExp('\\w' + socialSites.join('|') + "[/]" + "\\w");
 
 function addToList(div, str)
 {
@@ -20,6 +22,7 @@ function processData(data, max, showChart)
     {
         addToList("#topSites", "No history available.");
         addToList("#topVideos", "No history available.");
+        addToList("#topMedia", "No history available.");
         return;
     }
     else if (max >= data.length)
@@ -33,7 +36,7 @@ function processData(data, max, showChart)
     data.sort(function(a, b) { return b.visitCount - a.visitCount });
 
     // Show top ten visited sites
-    for (var i = 0; i < end; i++)
+    for (var i = 0; i < end && i < data.length; i++)
     {
         if (blacklistRegex.test(data[i].url))
         {
@@ -55,7 +58,7 @@ function processData(data, max, showChart)
     var end = max;
 
     // Show top ten visited videos
-    for (var i = 0; i < end; i++)
+    for (var i = 0; i < end && i < data.length; i++)
     {
         if (!musicRegex.test(data[i].url))
         {
@@ -70,6 +73,29 @@ function processData(data, max, showChart)
             else
             {
                 addToList("#topVideos", "[" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+            }
+        }
+    }
+
+    var end = max;
+
+    // Show top ten visited media sites
+    for (var i = 0; i < end && i < data.length; i++)
+    {
+        if (!socialRegex.test(data[i].url))
+        {
+            end++;
+        }
+        else
+        {
+            if (data[i].title == "") data[i].title = data[i].url;
+            if (showChart)
+            {
+                addToList("#topMedia", "<a class='graphVisits' data-url='" + data[i].url + "'><i class='material-icons'>insert_chart</i></a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+            }
+            else
+            {
+                addToList("#topMedia", "[" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
             }
         }
     }
