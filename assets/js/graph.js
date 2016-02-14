@@ -1,13 +1,11 @@
 var Chartjs = Chart.noConflict();
 var ctx = document.getElementById("testchart").getContext("2d");
 
-document.addEventListener('DOMContentLoaded', function() {
-
-    var classes = document.getElementsByClassName("graphVisits");
-
-    var createGraph = function() {
+function setUpGraphVisits()
+{
+    $('a.graphVisits').click(function(e) {
         var hours = new Array();
-        chrome.history.getVisits({ url: data }, function(visits) {
+        chrome.history.getVisits({ url: e.target.parentElement.attributes[1].nodeValue }, function(visits) {
             for (var j = 0; j < visits.length; j++)
             {
                 var a = visits[j].visitTime;
@@ -32,11 +30,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var lineChart = new Chartjs(ctx).Line(chartData, null);
         });
-    }
-
-    for (var i = 0; i < classes.length; i++)
-    {
-        classes[i].addEventListener('click', createGraph, false);
-    }
-
-});
+    });
+}

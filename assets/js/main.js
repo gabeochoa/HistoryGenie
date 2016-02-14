@@ -6,7 +6,8 @@ function addToList(str)
     $("#topSites ol").append("<li class='truncate'>" + str + "</li>");
 }
 
-$(document).ready(function() {
+function searchTopSites(callback)
+{
     chrome.history.search({ text: "", maxResults: 2147483647 }, function(data) {
         var max = 10;
 
@@ -33,11 +34,15 @@ $(document).ready(function() {
             }
             else
             {
-                addToList("<a class='graphVisits'>View Chart</a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+                addToList("<a class='graphVisits' data-url='" + data[i].url + "'><i class='material-icons'>insert_chart</i></a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
             }
         }
-        return;
+        callback();
     });
+}
+
+$(document).ready(function() {
+    searchTopSites(setUpGraphVisits);
 });
 
 function parseData(predata)

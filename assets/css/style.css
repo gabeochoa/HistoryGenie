@@ -35,3 +35,7 @@ h5 {
 a.graphVisits {
     cursor: pointer;
 }
+
+a.graphVisits i {
+    vertical-align: middle;
+}
