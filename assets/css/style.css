@@ -16,15 +16,13 @@ div.col.box {
 ol {
     font-size: 18px;
     list-style-type: decimal;
+    list-style-position: inside;
+    padding-left: 10px;
 }
 
 ol li {
     display: list-item!important;
     color: #000;
-}
-
-.truncate {
-    overflow: inherit!important;
 }
 
 h5 {

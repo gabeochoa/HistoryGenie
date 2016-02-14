@@ -1,13 +1,18 @@
 var Chartjs = Chart.noConflict();
 var ctx = document.getElementById("testchart").getContext("2d");
+var lineChart;
 
-function histogram(arr) {
+function histogram(arr)
+{
     var a = [], b = [], prev;
-    for ( var i = 0; i < arr.length; i++ ) {
-        if ( arr[i] !== prev ) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] !== prev)
+        {
             a.push(arr[i]);
             b.push(1);
-        } else {
+        }
+        else
+        {
             b[b.length-1]++;
         }
         prev = arr[i];
@@ -20,6 +25,7 @@ function histogram(arr) {
 function setUpGraphVisits()
 {
     $('a.graphVisits').click(function(e) {
+        if (lineChart !== undefined) lineChart.destroy();
         var hours = new Array();
         chrome.history.getVisits({ url: e.target.parentElement.attributes[1].nodeValue }, function(visits) {
             for (var j = 0; j < visits.length; j++)
@@ -31,13 +37,12 @@ function setUpGraphVisits()
             }
             hours.sort( function(a,b) { return a - b; } );
             histo = histogram(hours);
-            //console.log(histo);
             var chartData = {
                 labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
                 "20", "21", "22", "23"],
                 datasets: [{
-                    label: "My First dataset",
+                    label: "Time of Day",
                     fillColor: "rgba(220, 220, 220, 0.5)",
                     strokeColor: "rgba(220, 220, 220, 0.8)",
                     highlightFill: "rgba(220, 220, 220, 0.75)",
@@ -46,7 +51,9 @@ function setUpGraphVisits()
                 }]
             };
 
-            var lineChart = new Chartjs(ctx).Bar(chartData, null);
+            lineChart = new Chartjs(ctx).Bar(chartData, {
+                tooltipTemplate: "<%if (label){%><%=label + ':00' %>: <%}%><%= value + ' times visited' %>",
+            });
         });
     });
 }
