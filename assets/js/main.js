@@ -1,14 +1,16 @@
 var blacklist = ["google.com", "chrome-extension://"];
 var blacklistRegex = new RegExp( '\\b' + blacklist.join('\\b|\\b') + '\\b');
+var musicSites = ["soundcloud.com", "youtube.com", "spotify.com"];
+var musicRegex = new RegExp('\\w' + musicSites.join('|') + "[/]" + "\\w");
 
-function addToList(str)
+function addToList(div, str)
 {
-    $("#topSites ol").append("<li class='ellipsis'>" + str + "</li>");
+    $(div + " ol").append("<li class='ellipsis'>" + str + "</li>");
 }
 
-function clearList()
+function clearList(div)
 {
-    $("#topSites ol").empty();
+    $(div + " ol").empty();
 }
 
 function processData(data, max, showChart)
@@ -16,7 +18,8 @@ function processData(data, max, showChart)
     // Check if history data is available for analysis
     if (data.length == 0)
     {
-        addToList("No history available.");
+        addToList("#topSites", "No history available.");
+        addToList("#topVideos", "No history available.");
         return;
     }
     else if (max >= data.length)
@@ -24,25 +27,49 @@ function processData(data, max, showChart)
         max = data.length;
     }
 
+    var end = max;
+
     // Sort site history by visit count
     data.sort(function(a, b) { return b.visitCount - a.visitCount });
 
     // Show top ten visited sites
-    for (var i = 0; i < max; i++)
+    for (var i = 0; i < end; i++)
     {
         if (blacklistRegex.test(data[i].url))
         {
-            max++;
+            end++;
         }
         else
         {
             if (showChart)
             {
-                addToList("<a class='graphVisits' data-url='" + data[i].url + "'><i class='material-icons'>insert_chart</i></a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+                addToList("#topSites", "<a class='graphVisits' data-url='" + data[i].url + "'><i class='material-icons'>insert_chart</i></a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
             }
             else
             {
-                addToList("[" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+                addToList("#topSites", "[" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+            }
+        }
+    }
+
+    var end = max;
+
+    // Show top ten visited videos
+    for (var i = 0; i < end; i++)
+    {
+        if (!musicRegex.test(data[i].url))
+        {
+            end++;
+        }
+        else
+        {
+            if (showChart)
+            {
+                addToList("#topVideos", "<a class='graphVisits' data-url='" + data[i].url + "'><i class='material-icons'>insert_chart</i></a> [" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
+            }
+            else
+            {
+                addToList("#topVideos", "[" + data[i].visitCount + "] <a href='" + data[i].url + "'>" + data[i].title + "</a>");
             }
         }
     }
@@ -53,7 +80,6 @@ function searchTopSites(callback)
     chrome.history.search({ text: "", maxResults: 2147483647 }, function(data) {
         processData(data, 10, true);
         callback();
-        music(data)
     });
 }
 
@@ -64,7 +90,7 @@ $(document).ready(function() {
 function parseData(predata)
 {
     var data = JSON.parse(predata);
-    clearList();
+    clearList("#topSites");
     processData(data, 10, false);
 }
 

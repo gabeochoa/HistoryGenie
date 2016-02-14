@@ -1,25 +1,7 @@
 var Chartjs = Chart.noConflict();
 var ctx = document.getElementById("timeofdaychart").getContext("2d");
-var lineChart;
-
 var ctx2 = document.getElementById("musicchart").getContext("2d");
-
-function music(data)
-{
-
-    var musicsites = ["soundcloud.com", "youtube.com", "spotify.com"];
-    var musicreg = new RegExp('\\w' + musicsites.join('|') + "[/]" + "\\w");
-    
-    // Show top ten visited sites
-    for (var i = 0; i < data.length; i++)
-    {
-        if (musicreg.test(data[i].url))
-        {
-            console.log(data[i].url);
-        }
-    }
-}
-
+var lineChartSites, lineChartVideos;
 
 function histogram(arr)
 {
@@ -44,7 +26,7 @@ function histogram(arr)
 function setUpGraphVisits()
 {
     $('a.graphVisits').click(function(e) {
-        if (lineChart !== undefined) lineChart.destroy();
+        if (lineChartSites !== undefined) lineChartSites.destroy();
         var hours = new Array();
         chrome.history.getVisits({ url: e.target.parentElement.attributes[1].nodeValue }, function(visits) {
             for (var j = 0; j < visits.length; j++)
@@ -70,7 +52,7 @@ function setUpGraphVisits()
                 }]
             };
 
-            lineChart = new Chartjs(ctx).Bar(chartData, {
+            lineChartSites = new Chartjs(ctx).Bar(chartData, {
                 tooltipTemplate: "<%if (label){%><%=label + ':00' %>: <%}%><%= value + ' times visited' %>",
             });
         });

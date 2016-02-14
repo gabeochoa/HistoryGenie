@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link rel="stylesheet" type="text/css" href="assets/css/materialize.min.css">
         <!-- Fonts -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
@@ -14,11 +15,29 @@
                 <div class="col s12">
                     <h1 class="center-align">History Genie</h1>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s6"><a class="active" href="#sitesTab">Top Visited Websites</a></li>
+                        <li class="tab col s6"><a href="#videosTab">Top Videos Watched</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col s12 box">
-                    <!--<input id="upload" type="file" />-->
-                    <h5>Top Visited Websites</h5>
-                    <div id="topSites">
-                        <ol></ol>
+                    <div id="sitesTab">
+                        <!--<input id="upload" type="file" />-->
+                        <h5>Top Visited Websites</h5>
+                        <div id="topSites">
+                            <ol></ol>
+                        </div>
+                    </div>
+                    <div id="videosTab">
+                        <h5>Top Videos Watched</h5>
+                        <div id="topVideos">
+                            <ol></ol>
+                        </div>
                     </div>
                 </div>
                 <div class="col s12">
