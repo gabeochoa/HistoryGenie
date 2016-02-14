@@ -22,6 +22,7 @@ RoadMap
 * ~~Load History automatically (Chrome API)~~
 * ~~Top Ten Visited Sites~~
 * ~~Site give time of day~~
+* ~~Add tab for top videos~~
 * Time of day given site
 * Beautiful Charts & Graphs
 * Analyse Search History
