@@ -1,6 +1,22 @@
 var Chartjs = Chart.noConflict();
 var ctx = document.getElementById("testchart").getContext("2d");
 
+function histogram(arr) {
+    var a = [], b = [], prev;
+    for ( var i = 0; i < arr.length; i++ ) {
+        if ( arr[i] !== prev ) {
+            a.push(arr[i]);
+            b.push(1);
+        } else {
+            b[b.length-1]++;
+        }
+        prev = arr[i];
+    }
+
+    return [a, b];
+}
+
+
 function setUpGraphVisits()
 {
     $('a.graphVisits').click(function(e) {
@@ -13,7 +29,9 @@ function setUpGraphVisits()
                 d.setUTCSeconds(a);
                 hours.push(d.getHours());
             }
-
+            hours.sort( function(a,b) { return a - b; } );
+            histo = histogram(hours);
+            //console.log(histo);
             var chartData = {
                 labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
@@ -24,11 +42,11 @@ function setUpGraphVisits()
                     strokeColor: "rgba(220, 220, 220, 0.8)",
                     highlightFill: "rgba(220, 220, 220, 0.75)",
                     highlightStroke: "rgba(220, 220, 220, 1)",
-                    data: hours
+                    data: histo[1]
                 }]
             };
 
-            var lineChart = new Chartjs(ctx).Line(chartData, null);
+            var lineChart = new Chartjs(ctx).Bar(chartData, null);
         });
     });
 }
