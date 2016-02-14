@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "History Genie",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Analyzes your browser history for trends and collects statistics.",
     "browser_action": {
         "default_title": "History Genie",
