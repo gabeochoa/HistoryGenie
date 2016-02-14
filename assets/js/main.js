@@ -3,7 +3,7 @@ var blacklistRegex = new RegExp( '\\b' + blacklist.join('\\b|\\b') + '\\b');
 
 function addToList(str)
 {
-    $("#topSites ol").append("<li class='truncate'>" + str + "</li>");
+    $("#topSites ol").append("<li class='ellipsis'>" + str + "</li>");
 }
 
 function clearList()
@@ -74,7 +74,7 @@ $('#upload').change(function() {
     reader.onloadend = function(evt)
     {
         if (evt.target.readyState == FileReader.DONE)
-        {   
+        {
             parseData(evt.target.result);
         }
     }
